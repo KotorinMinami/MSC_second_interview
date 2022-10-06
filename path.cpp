@@ -17,7 +17,7 @@ typedef struct node
 
 int top[maxn] , fa[maxn] , dep[maxn] , siz[maxn] ,son[maxn];
 node sma[maxn] ; 
-int n , q , a , b , m=inf , last=0;
+int n , q , a , b , m , last;
 std::vector<std::vector<int> > edge;
 std::bitset<maxn> v;
 
@@ -145,7 +145,7 @@ int lca(int x , int y)
         else    return sma[1].d1;
         if(sma[1].d2 == xup)    c2 = xans;
         else if(sma[1].d2 == yup)   c2 = yans;
-        else return sma[1].d2;
+        else return std::min(sma[1].d2 ， c1);
         return std::min(m , std::min(c1 , c2));
     }
 }
@@ -166,6 +166,7 @@ int main()
         memset(sma , 0 , sizeof(sma));
         v.reset();
         last = 0;
+        m = inf;
         for(int i=1 ; i<n ; i++)
         {
             scanf("%d%d" , &a , &b);
